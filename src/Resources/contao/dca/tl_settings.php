@@ -11,16 +11,16 @@
 // Load language file(s)
 System::loadLanguageFile('tl_serverhint');
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 /**
  * System configuration
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] = str_replace
-(
-    ';{proxy_legend',
-    ';{serverhint_legend:hide},serverhint;{proxy_legend',
-    $GLOBALS['TL_DCA']['tl_settings']['palettes']['default']
-);
+PaletteManipulator::create()
+    ->addLegend('serverhint_legend:hide', 'frontend_legend', PaletteManipulator::POSITION_AFTER)
+    ->addField('serverhint', 'serverhint_legend:hide', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('default', 'tl_settings')
+;
 
 // Fields
 $GLOBALS['TL_DCA']['tl_settings']['fields']['serverhint'] = array
