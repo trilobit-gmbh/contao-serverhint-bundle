@@ -7,7 +7,7 @@
  * @link       http://github.com/trilobit-gmbh/contao-serverhint-bundle
  */
 
-namespace Trilobit\ServerhintBundle;
+namespace Trilobit\ServerhintBundle\Widget;
 
 use Contao\Widget;
 
