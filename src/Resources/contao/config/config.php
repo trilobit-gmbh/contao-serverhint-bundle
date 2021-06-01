@@ -7,8 +7,8 @@
  * @link       http://github.com/trilobit-gmbh/contao-serverhint-bundle
  */
 
-use Trilobit\ServerhintBundle\Widget\ServerHintWizard;
 use Trilobit\ServerhintBundle\Template\BackendTemplate;
+use Trilobit\ServerhintBundle\Widget\ServerHintWizard;
 
 $GLOBALS['BE_FFL']['serverHintWizard'] = ServerHintWizard::class;
 
