@@ -22,7 +22,7 @@ class BackendTemplate
 
         if (!empty($hint) && \count($hint)) {
             foreach ($hint as $value) {
-                if ('' === $value['published']) {
+                if (empty($value['published'])) {
                     continue;
                 }
 
