@@ -1,7 +1,7 @@
 {
     "name": "trilobit-gmbh/contao-serverhint-bundle",
-    "type": "contao-bundle",
     "description": "Contao 4 serverhint bundle",
+    "type": "contao-bundle",
     "license": "LGPL-3.0-or-later",
     "authors": [
         {
@@ -22,10 +22,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Trilobit\\PackagistinfoBundle\\": "src/"
+            "Trilobit\\ServerhintBundle\\": "src/"
         }
     },
     "extra": {
-        "contao-manager-plugin": "Trilobit\\PackagistinfoBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "Trilobit\\ServerhintBundle\\ContaoManager\\Plugin"
     }
 }
