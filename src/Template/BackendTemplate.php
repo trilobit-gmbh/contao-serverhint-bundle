@@ -49,7 +49,7 @@ class BackendTemplate
             }
             if (!empty($style)) {
                 $style = '<style>'.$style.'</style>';
-                $buffer = \Safe\preg_replace('/<body/', $style.'<body', $buffer);
+                $buffer = \preg_replace('/<body/', $style.'<body', $buffer);
             }
         }
 
