@@ -1,36 +1,30 @@
 <?php
 
-/**
- * Contao Open Source CMS
- *
- * Copyright (c) 2005-2017 Leo Feyer
- *
- * @license LGPL-3.0+
+/*
+ * @copyright  trilobit GmbH
+ * @author     trilobit GmbH <https://github.com/trilobit-gmbh>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/trilobit-gmbh/contao-serverhint-bundle
  */
 
 namespace Trilobit\ServerhintBundle;
 
 use Contao\Widget;
 
-
 /**
- * Class ServerHintWizard
- * @package Trilobit\ServerhintBundle
+ * Class ServerHintWizard.
  */
 class ServerHintWizard extends Widget
 {
-
     /**
      * @var bool
      */
     protected $blnSubmitInput = true;
 
-
     /**
      * @var string
      */
     protected $strTemplate = 'be_widget';
-
 
     /**
      * @return bool|void
@@ -41,39 +35,32 @@ class ServerHintWizard extends Widget
         $options = $this->getPost($this->strName);
 
         // Check labels only (values can be empty)
-        if (is_array($options))
-        {
-            foreach ($options as $key=>$option)
-            {
+        if (\is_array($options)) {
+            foreach ($options as $key => $option) {
                 // Unset empty rows
-                if ($option['label'] == '')
-                {
+                if ('' === $option['label']) {
                     unset($options[$key]);
                     continue;
                 }
 
                 $options[$key]['label'] = trim($option['label']);
                 $options[$key]['value'] = trim($option['value']);
-                $options[$key]['hint']  = trim($option['hint']);
+                $options[$key]['hint'] = trim($option['hint']);
 
-                if ($options[$key]['label'] != '')
-                {
+                if ('' !== $options[$key]['label']) {
                     $this->mandatory = false;
                 }
 
                 // Strip double quotes (see #6919)
-                if ($options[$key]['label'] != '')
-                {
+                if ('' !== $options[$key]['label']) {
                     $options[$key]['label'] = str_replace('"', '', $options[$key]['label']);
                 }
 
-                if ($options[$key]['value'] != '')
-                {
+                if ('' !== $options[$key]['value']) {
                     $options[$key]['value'] = str_replace('"', '', $options[$key]['value']);
                 }
 
-                if ($options[$key]['hint'] != '')
-                {
+                if ('' !== $options[$key]['hint']) {
                     $options[$key]['hint'] = str_replace('"', '', $options[$key]['hint']);
                 }
             }
@@ -82,30 +69,26 @@ class ServerHintWizard extends Widget
         $options = array_values($options);
         $varInput = $this->validator($options);
 
-        if (!$this->hasErrors())
-        {
+        if (!$this->hasErrors()) {
             $this->varValue = $varInput;
         }
 
         // Reset the property
-        if ($mandatory)
-        {
+        if ($mandatory) {
             $this->mandatory = true;
         }
     }
-
 
     /**
      * @return string
      */
     public function generate()
     {
-        $arrButtons = array('copy', 'delete', 'drag');
+        $arrButtons = ['copy', 'delete', 'drag'];
 
         // Make sure there is at least an empty array
-        if (!is_array($this->varValue) || !$this->varValue[0])
-        {
-            $this->varValue = array(array(''));
+        if (!\is_array($this->varValue) || !$this->varValue[0]) {
+            $this->varValue = [['']];
         }
 
         // Begin the table
@@ -122,8 +105,7 @@ class ServerHintWizard extends Widget
   <tbody class="sortable">';
 
         // Add fields
-        for ($i=0, $c=count($this->varValue); $i<$c; $i++)
-        {
+        for ($i = 0, $c = \count($this->varValue); $i < $c; ++$i) {
             $return .= '
     <tr>
       <td><input type="text" name="'.$this->strId.'['.$i.'][value]" id="'.$this->strId.'_value_'.$i.'" class="tl_text" value="'.\StringUtil::specialchars($this->varValue[$i]['value']).'"></td>
@@ -136,15 +118,11 @@ class ServerHintWizard extends Widget
             $return .= '
       <td>';
 
-            foreach ($arrButtons as $button)
-            {
-                if ($button == 'drag')
-                {
-                    $return .= ' <button type="button" class="drag-handle" title="' . \StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['move']) . '">' . \Image::getHtml('drag.svg') . '</button>';
-                }
-                else
-                {
-                    $return .= ' <button type="button" data-command="' . $button . '" title="' . \StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['ow_'.$button]) . '">' . \Image::getHtml($button.'.svg') . '</button>';
+            foreach ($arrButtons as $button) {
+                if ('drag' === $button) {
+                    $return .= ' <button type="button" class="drag-handle" title="'.\StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['move']).'">'.\Image::getHtml('drag.svg').'</button>';
+                } else {
+                    $return .= ' <button type="button" data-command="'.$button.'" title="'.\StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'">'.\Image::getHtml($button.'.svg').'</button>';
                 }
             }
 
