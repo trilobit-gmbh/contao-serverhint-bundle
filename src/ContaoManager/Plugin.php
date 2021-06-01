@@ -9,9 +9,11 @@
 
 namespace Trilobit\ServerhintBundle\ContaoManager;
 
+use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use Trilobit\ServerhintBundle\TrilobitServerhintBundle;
 
 /**
  * Plugin for the Contao Manager.
@@ -26,8 +28,8 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create('Trilobit\ServerhintBundle\TrilobitServerhintBundle')
-                ->setLoadAfter(['Contao\CoreBundle\ContaoCoreBundle']),
+            BundleConfig::create(TrilobitServerhintBundle::class)
+                ->setLoadAfter([ContaoCoreBundle::class]),
         ];
     }
 }
