@@ -1,31 +1,26 @@
 <?php
 
-/**
- * Contao Open Source CMS
- *
- * Copyright (c) 2005-2017 Leo Feyer
- *
- * @license LGPL-3.0+
+/*
+ * @copyright  trilobit GmbH
+ * @author     trilobit GmbH <https://github.com/trilobit-gmbh>
+ * @license    LGPL-3.0-or-later
+ * @link       http://github.com/trilobit-gmbh/contao-serverhint-bundle
  */
+
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 // Load language file(s)
 System::loadLanguageFile('tl_serverhint');
 
-use Contao\CoreBundle\DataContainer\PaletteManipulator;
+// Fields
+$GLOBALS['TL_DCA']['tl_settings']['fields']['serverhint'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_settings']['serverhint'],
+    'inputType' => 'serverHintWizard',
+    'eval' => ['tl_class' => 'clr'],
+];
 
-/**
- * System configuration
- */
 PaletteManipulator::create()
-    ->addLegend('serverhint_legend:hide', 'frontend_legend', PaletteManipulator::POSITION_AFTER)
-    ->addField('serverhint', 'serverhint_legend:hide', PaletteManipulator::POSITION_APPEND)
+    ->addLegend('serverhint_legend', 'proxy_legend', PaletteManipulator::POSITION_BEFORE)
+    ->addField(['serverhint'], 'serverhint_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('default', 'tl_settings')
 ;
-
-// Fields
-$GLOBALS['TL_DCA']['tl_settings']['fields']['serverhint'] = array
-(
-    'label'     => &$GLOBALS['TL_LANG']['tl_settings']['serverhint'],
-    'inputType' => 'serverHintWizard',
-    'eval'      => array('tl_class'=>'clr')
-);
