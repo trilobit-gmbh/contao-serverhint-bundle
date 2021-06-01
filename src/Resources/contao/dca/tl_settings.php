@@ -20,7 +20,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['serverhint'] = [
 ];
 
 PaletteManipulator::create()
-    ->addLegend('serverhint_legend', 'proxy_legend', PaletteManipulator::POSITION_BEFORE)
+    ->addLegend('serverhint_legend', 'frontend_legend', PaletteManipulator::POSITION_BEFORE)
     ->addField(['serverhint'], 'serverhint_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('default', 'tl_settings')
 ;
